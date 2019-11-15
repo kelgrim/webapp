@@ -11,11 +11,6 @@ public class Employee {
 	
 	public Employee() {
 		super();
-		/*
-		departments = new Department[2];
-		departments[0]= new Department("dep name", "dep location");
-		departments[1]= new Department("dep name 2", "dep location 2");
-		*/
 	}
 
 	public int getId() {
@@ -48,6 +43,10 @@ public class Employee {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+	
+	public String toString() {
+		return firstName + " " + lastName + " " + email;
 	}
 	
 	/*public Department[] getDepartments() {
