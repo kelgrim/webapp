@@ -151,7 +151,6 @@ public class EmployeeJdbcRepository {
 		catch (Exception e) {
 			e.printStackTrace();
 			throw new EmployeeDeleteFromDbFailedException(id);
-			//return -1;
 		}
 		
 		
