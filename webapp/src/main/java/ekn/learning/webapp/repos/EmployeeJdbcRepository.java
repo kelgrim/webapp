@@ -22,8 +22,9 @@ import org.springframework.stereotype.Repository;
 import ekn.learning.webapp.exceptions.EmployeeDeleteFromDbFailedException;
 import ekn.learning.webapp.exceptions.EmployeeNotFoundException;
 import ekn.learning.webapp.exceptions.EmployeeWriteToDbFailedException;
-//import ekn.learning.webapp.model.Department;
 import ekn.learning.webapp.model.Employee;
+
+//TODO: Add update method. 
 
 @Repository
 public class EmployeeJdbcRepository {
@@ -48,7 +49,7 @@ public class EmployeeJdbcRepository {
 	    }
 	}
 	
-	public int addEmployeeTwo(Employee employee) {
+	public int addEmployee(Employee employee) {
 		String sql = "insert into tbl_employees (FIRST_NAME, LAST_NAME, EMAIL)"
 				+ "values (?, ?, ?);";
 		
@@ -74,23 +75,12 @@ public class EmployeeJdbcRepository {
 		catch(EmptyResultDataAccessException e) {
 			throw new EmployeeWriteToDbFailedException();
 		}
-		//TODO: change cast to int to something better. 
-		return (int) keyHolder.getKey();
-	}
-	
-	
-	public int addEmployee(Employee employee) throws EmployeeWriteToDbFailedException{	
-		
-		try {			
-			String query = "insert into tbl_employees (FIRST_NAME, LAST_NAME, EMAIL)"
-					+ "values (:firstName, :lastName, :email);";
-			
-			npJdbcTemplate.update(query, new BeanPropertySqlParameterSource(employee));
-			return 1;
-		}
-		catch (DataIntegrityViolationException e) {
+		catch(DataIntegrityViolationException e) {
 			throw new EmployeeWriteToDbFailedException();
 		}
+		
+		//TODO: change cast to int to something better. 
+		return (int) keyHolder.getKey();
 	}
 	
 	public int addEmployee(String firstName, String lastName, String email) {	
@@ -152,7 +142,7 @@ public class EmployeeJdbcRepository {
 			e.printStackTrace();
 			throw new EmployeeDeleteFromDbFailedException(id);
 		}
-		
-		
 	}
+	
+	
 }

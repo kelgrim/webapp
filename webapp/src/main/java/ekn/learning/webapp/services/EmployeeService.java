@@ -17,6 +17,7 @@ public class EmployeeService {
 	@Autowired
 	private EmployeeJdbcRepository repository;
 	
+	//TODO: Return the employee instead of the Id
 	public Employee getEmployee(int id) {
 		return  repository.findById(id);
 	}

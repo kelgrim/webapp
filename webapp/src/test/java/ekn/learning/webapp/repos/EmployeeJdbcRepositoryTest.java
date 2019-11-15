@@ -4,10 +4,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-//import java.util.ArrayList;
 import java.util.List;
 
-//import org.hamcrest.CoreMatchers;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -16,10 +14,6 @@ import ekn.learning.webapp.exceptions.EmployeeDeleteFromDbFailedException;
 import ekn.learning.webapp.exceptions.EmployeeNotFoundException;
 import ekn.learning.webapp.exceptions.EmployeeWriteToDbFailedException;
 import ekn.learning.webapp.model.Employee;
-
-//import static org.hamcrest.MatcherAssert.assertThat;
-//import static org.hamcrest.Matchers.containsInAnyOrder;
-//import static org.hamcrest.Matchers.hasItem;
 
 @SpringBootTest
 public class EmployeeJdbcRepositoryTest {
@@ -55,7 +49,7 @@ public class EmployeeJdbcRepositoryTest {
 	public void addEmployeeSuccess() {
 		Employee employee = getTestEmployee();
 		int result = repository.addEmployee(employee);
-		assertTrue(result == 1);
+		assertTrue(result > 0);
 	}
 	
 	@Test
@@ -115,23 +109,18 @@ public class EmployeeJdbcRepositoryTest {
 	
 	@Test
 	public void deleteEmployeeSuccess() {
-		int id = repository.addEmployeeTwo(getTestEmployee() );
+		int id = repository.addEmployee(getTestEmployee() );
 		int result = repository.deleteEmployee(id);
-		assertTrue(result == 1);
+		assertTrue(result > 0);
 	}
 	
 	@Test
 	public void deleteEmployeeFailed() {
-		//int id = repository.addEmployeeTwo(getTestEmployee() );
 		assertThrows(EmployeeDeleteFromDbFailedException.class, () -> {repository.deleteEmployee(9999999);});
-		//assertTrue(result == -1);
 	}
-	
-	
-	
-	
-	/* Helper functions
-	 * 
+		
+	/* 
+	 * Helper functions
 	 */
 	
 	//Just get a random employee quickly
@@ -143,6 +132,7 @@ public class EmployeeJdbcRepositoryTest {
 		return employee;
 	}
 	
+	//Compare two employees. This because usually they are not the same objects
 	private boolean compare(Employee a, Employee b) {
 		
 		System.out.println("Comparing" + a.toString() + " with "+ b.toString() );
