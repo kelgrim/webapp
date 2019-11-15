@@ -1,5 +1,7 @@
 package ekn.learning.webapp.controller;
 
+//Top level path = /api/v1
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -17,7 +19,7 @@ import ekn.learning.webapp.model.Employee;
 import ekn.learning.webapp.services.EmployeeService;
 
 @RestController
-@RequestMapping(value = "/employeejson/employee") 
+@RequestMapping(value = "/employee") 
 public class EmployeeController {
 	
 	@Autowired
