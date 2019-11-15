@@ -13,7 +13,7 @@ import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.stereotype.Repository;
 
 import ekn.learning.webapp.exceptions.EmployeeNotFoundException;
-import ekn.learning.webapp.model.Department;
+//import ekn.learning.webapp.model.Department;
 import ekn.learning.webapp.model.Employee;
 
 @Repository

@@ -1,63 +1,73 @@
 package ekn.learning.webapp.controller;
 
+import java.util.HashMap;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicLong;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
-
-import ekn.learning.webapp.model.GreetingModel;
-import ekn.learning.webapp.repos.EmployeeJdbcRepository;
-import ekn.learning.webapp.model.CalculatorModel;
-import ekn.learning.webapp.model.DefaultModel;
+import ekn.learning.webapp.exceptions.EmployeeInvalidArgumentsException;
 import ekn.learning.webapp.model.Employee;
-//TODO: Class splitsen voor de verschillende modellen. 
+
+
+import ekn.learning.webapp.services.EmployeeService;
+
 @RestController
+@RequestMapping(value = "/employeejson/employee") 
 public class EmployeeController {
-	 @Autowired
-	 EmployeeJdbcRepository repository;
 	
-	@RequestMapping(value= "/employee")
-	public Employee getEmployee(@RequestParam(value = "id", defaultValue = "1")Integer id) {
-	    
-	      return repository.findById(id);
-	    
-	}
+	@Autowired
+	private EmployeeService service;
 	
-	//Minute change
-	
-	@RequestMapping(value= "/getemployee")
-	public Employee getEmployeeAlt(@RequestParam(value="id") Integer id) {
-		return repository.getEmployeeAlternative(id);
-	}
-	
-	@RequestMapping(value= "/addemployee")
-	public Employee addEmployee(@RequestParam(value = "firstname") String firstName, 
-			@RequestParam(value = "lastname") String lastName, 
-			@RequestParam(value = "email") String email) {
-		int addedId = repository.addEmployee(firstName, lastName, email);
-		if (addedId >= 0) {
-		 return repository.findById(addedId);
-		}
-		else return null;
-	}
-	
-	@RequestMapping(value= "/getemployees")
+	@RequestMapping(method = RequestMethod.GET)
 	public List<Employee> getEmployees(){
-		return repository.getEmployees();
+		return service.getEmployees();
 	}
 	
-	@RequestMapping(value = "/deleteempployee")
-	public int deleteEmployee(int id) {
-		return repository.deleteEmployee(id);
-		//return -1;
+	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
+	public Employee getEmployee(@PathVariable() Integer id) {
+			  return service.getEmployee(id);
+
+	}
+	
+	@RequestMapping(method = RequestMethod.POST)
+	public int addEmployee(@RequestBody() Employee employee) {
+		return service.addEmployee(employee);	
 	}
 	
 	
+	//TODO: Verwijderen van deze functie. Is alleen voor testen
+	@RequestMapping(value = "/test", method = RequestMethod.GET)
+	public Map getStuff() {
+		Employee employee = new Employee();
+		employee.setId(28);
+		employee.setFirstName("testname");
+		employee.setLastName("Test last name");
+		employee.setEmail("email");
+		//Faculty faculty = new Faculty();
+		//faculty.setId(21);
+		//faculty.setName("Test faculty");
+		
+		Map<String, Object> map = new HashMap<>();
+		map.put("employee", employee);
+		//map.put("faculty", faculty);
+		return map;
+		
+		//ExceptionHandlingController exception = new ExceptionHandlingController();
+		//throw exception.handleError("/test", Exception.);
+	
+		
+	}
+	
+	
+	@RequestMapping(value = "/error", method = RequestMethod.GET)
+	public String doError() {
+		//throw new EmployeeNotFoundException(1);
+		throw new EmployeeInvalidArgumentsException();
+	}
 	
 }
