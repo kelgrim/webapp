@@ -3,6 +3,7 @@ package ekn.learning.webapp.repos;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -13,6 +14,7 @@ import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.stereotype.Repository;
 
 import ekn.learning.webapp.exceptions.EmployeeNotFoundException;
+import ekn.learning.webapp.exceptions.EmployeeWriteToDbFailedException;
 //import ekn.learning.webapp.model.Department;
 import ekn.learning.webapp.model.Employee;
 
@@ -22,11 +24,7 @@ public class EmployeeJdbcRepository {
 	 JdbcTemplate jdbcTemplate;
 	
 	@Autowired
-	NamedParameterJdbcTemplate npJdbcTemplate;
-	
-	//@Autowired 
-	// PlatformTransactionManager platformTransactionManager;
-	
+	NamedParameterJdbcTemplate npJdbcTemplate;	
 	
 	public Employee findById(int id) throws EmployeeNotFoundException {
 		
@@ -41,78 +39,37 @@ public class EmployeeJdbcRepository {
 	    catch(EmptyResultDataAccessException e){
 	    	throw new EmployeeNotFoundException(id);
 	    }
-	   
-		/*
-		Employee employee = new Employee();
-		employee.setId(id);
-		employee.setEmail("email");
-		employee.setFirstName("first name");
-		employee.setLastName("last name");
-		employee.setDepartment(new Department("dep name", "dep loc"));
-		
-		return employee;
-		*/
 	}
 	
 	
-	public int addEmployee(Employee employee) {	
+	public int addEmployee(Employee employee) throws EmployeeWriteToDbFailedException{	
 		
 		try {			
 			String query = "insert into tbl_employees (FIRST_NAME, LAST_NAME, EMAIL)"
 					+ "values (:firstName, :lastName, :email);";
 			
-			//System.out.println
-			
 			npJdbcTemplate.update(query, new BeanPropertySqlParameterSource(employee));
 			return 1;
 		}
-		catch (Exception e) {
-			System.out.println("Adding employee to db failed");
-			return -1;
+		catch (DataIntegrityViolationException e) {
+			throw new EmployeeWriteToDbFailedException();
 		}
 	}
-	
-	
-	
-	//Old versions
-	/*
-	public int addEmployee(Employee employee) {	
-		
-		try {
-			SqlParameterSource namedParameters = new MapSqlParameterSource();
-			((MapSqlParameterSource) namedParameters).addValue("firstName", employee.getFirstName() );
-			((MapSqlParameterSource) namedParameters).addValue("lastName", employee.getLastName() );
-			((MapSqlParameterSource) namedParameters).addValue("email", employee.getEmail() );
-			
-			String query = "insert into tbl_employees (FIRST_NAME, LAST_NAME, EMAIL)"
-					+ "values (:firstName, :lastName, :email);";
-			
-			npJdbcTemplate.update(query, namedParameters);
-			return 1;
-		}
-		catch (Exception e) {
-			System.out.println("Adding employee to db failed");
-			return -1;
-		}
-	}
-	*/
 	
 	public int addEmployee(String firstName, String lastName, String email) {	
+		if (firstName == null || lastName == null || email == null) {
+			throw new EmployeeWriteToDbFailedException();
+		}
 		try{
-			int id = (int)(Math.random() * 9999999) + 1;
-			String query = String.format("insert into tbl_employees (ID, FIRST_NAME, LAST_NAME, EMAIL) "
-					+ "values (%s,'%s','%s','%s');", id, firstName, lastName, email);
+			String query = String.format("insert into tbl_employees (FIRST_NAME, LAST_NAME, EMAIL) "
+					+ "values ('%s','%s','%s');", firstName, lastName, email);
 			
 			jdbcTemplate.update(query);	
-			return id;
-			
+			return 1;
 			}
-		catch (Exception e) {
-			 // platformTransactionManager.rollback(status);
-			  System.out.println("Failed");
+		catch (DataIntegrityViolationException e) {
+			throw new EmployeeWriteToDbFailedException();
 		}
-		
-		return -1;
 		
 	}
 	
