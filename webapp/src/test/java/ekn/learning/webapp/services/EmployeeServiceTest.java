@@ -28,7 +28,7 @@ public class EmployeeServiceTest {
 	@Mock
 	EmployeeJdbcRepository mockRepository;
 	
-	 @Rule public MockitoRule mockitoRule = MockitoJUnit.rule(); 
+//	 @Rule public MockitoRule mockitoRule = MockitoJUnit.rule(); 
 	
 	//@InjectMocks
 	//private EmployeeService service;
