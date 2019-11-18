@@ -27,16 +27,18 @@ public class EmployeeService {
 		return repository.getEmployees();
 	}
 	
-	public int addEmployee(Employee employee) {
-		return repository.addEmployee(employee);	
+	public Employee addEmployee(Employee employee) {
+		int employeeId = repository.addEmployee(employee);	
+		return repository.findById(employeeId);	
 	}
 
 	public Integer deleteEmployee(int id) {
 		return repository.deleteEmployee(id);
 	}
 
-	public int updateEmployee(int id, Employee employee) {
-		return repository.updateEmployee(id, employee);
+	public Employee updateEmployee(int id, Employee employee) {
+		int updatedId =  repository.updateEmployee(id, employee);
+		return repository.findById(updatedId);
 	}
 	
 	

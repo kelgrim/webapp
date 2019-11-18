@@ -1,6 +1,6 @@
 package ekn.learning.webapp.controller;
 
-//Top level path = /api/v1
+//Top level path = /api/v1, configured in application.properties
 
 import java.util.HashMap;
 import java.util.List;
@@ -36,13 +36,18 @@ public class EmployeeController {
 	}
 	
 	@RequestMapping(method = RequestMethod.POST)
-	public int addEmployee(@RequestBody() Employee employee) {
+	public Employee addEmployee(@RequestBody() Employee employee) {
 		return service.addEmployee(employee);	
 	}
 	
 	@RequestMapping(value = "/{id}", method = RequestMethod.PATCH)
-	public int updateEmployee(@PathVariable() Integer id, @RequestBody() Employee employee) {
+	public Employee updateEmployee(@PathVariable() Integer id, @RequestBody() Employee employee) {
 		return service.updateEmployee(id, employee);
+	}
+	
+	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+	public int deleteEmployee(@PathVariable() Integer id) {
+		return service.deleteEmployee(id);
 	}
 
 }

@@ -38,15 +38,17 @@ public class EmployeeServiceTest {
 	    @BeforeEach
 	    void setMockOutput() {
 	    	
-	    	Mockito.when(repository.findById(1)).thenReturn(getTestEmployee());
+	    	testEmployeeSuccess = getTestEmployee();
+	    	testEmployeeException = getTestEmployee();
+	    	
+	    	Mockito.when(repository.findById(1)).thenReturn(testEmployeeSuccess);
 	    	Mockito.when(repository.findById(99901)).thenThrow(EmployeeNotFoundException.class);
 	    	
 	    	List<Employee> emps= new ArrayList<>();
 	    	emps.add(getTestEmployee());
 	    	Mockito.when(repository.getEmployees()).thenReturn(emps);
 	    	
-	    	testEmployeeSuccess = getTestEmployee();
-	    	testEmployeeException = getTestEmployee();
+	    	
 	    	Mockito.when(repository.addEmployee(testEmployeeSuccess) ).thenReturn(1);
 	    	Mockito.when(repository.addEmployee(testEmployeeException) ).thenThrow(EmployeeWriteToDbFailedException.class);
 	    	
@@ -76,9 +78,9 @@ public class EmployeeServiceTest {
 	    }
 	    
 	    @Test
-	    public void addEmployee_returnInt() {
-	    	int result = service.addEmployee(testEmployeeSuccess);
-	    	assertEquals(1,result);
+	    public void addEmployee_returnCustomer() {
+	    	Employee result = service.addEmployee(testEmployeeSuccess);
+	    	assertEquals(testEmployeeSuccess,result);
 	    }
 	    
 	    @Test
@@ -87,7 +89,7 @@ public class EmployeeServiceTest {
 	    }
 	    
 	    @Test
-	    public void deleteEmployee_returnInt() {
+	    public void deleteEmployee_returnId() {
 	    	assertEquals(1, service.deleteEmployee(1));
 	    }
 	    
@@ -97,9 +99,9 @@ public class EmployeeServiceTest {
 	    }
 	    
 	    @Test
-	    public void updateEmployee_returnInt() {
-	    	int result = service.updateEmployee(1, testEmployeeSuccess);
-	    	assertEquals(1, result);
+	    public void updateEmployee_returnCustomer() {
+	    	Employee result = service.updateEmployee(1, testEmployeeSuccess);
+	    	assertEquals(testEmployeeSuccess, result);
 	    }
 	    
 	    @Test
