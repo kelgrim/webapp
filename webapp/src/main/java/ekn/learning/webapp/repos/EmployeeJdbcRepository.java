@@ -11,7 +11,6 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.PreparedStatementCreator;
-import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
@@ -21,6 +20,7 @@ import org.springframework.stereotype.Repository;
 
 import ekn.learning.webapp.exceptions.EmployeeDeleteFromDbFailedException;
 import ekn.learning.webapp.exceptions.EmployeeNotFoundException;
+import ekn.learning.webapp.exceptions.EmployeeUpdateFailedException;
 import ekn.learning.webapp.exceptions.EmployeeWriteToDbFailedException;
 import ekn.learning.webapp.model.Employee;
 
@@ -130,7 +130,6 @@ public class EmployeeJdbcRepository {
 		String sql = "DELETE FROM TBL_EMPLOYEES WHERE ID = ?";
 		try {
 			int result = jdbcTemplate.update(sql, id);
-			System.out.println(result + " <----------------- Result here");
 			if (result == 0) {
 				throw new EmployeeDeleteFromDbFailedException(id);
 			}
@@ -139,6 +138,29 @@ public class EmployeeJdbcRepository {
 		catch (Exception e) {
 			e.printStackTrace();
 			throw new EmployeeDeleteFromDbFailedException(id);
+		}
+	}
+
+	public int updateEmployee(int id, Employee employee) throws EmployeeUpdateFailedException {
+		try {
+			//KeyHolder keyHolder = new GeneratedKeyHolder();
+			String query = String.format(
+					"update tbl_employees "
+					+ "set "
+					+ "first_name = '%s', "
+					+ "last_name = '%s', "
+					+ "email = '%s' "
+					+ "where id = %s;", employee.getFirstName(), employee.getLastName(), employee.getEmail(), id);
+			
+			System.out.println("---- Update query -----");
+			System.out.println(query);
+			System.out.println("---- Update query -----");
+			int result = jdbcTemplate.update(query);	
+			if (result == 0) throw new EmployeeUpdateFailedException(id);
+			else	return id;
+		}
+		catch (Exception e) {
+			throw new EmployeeUpdateFailedException(id);
 		}
 	}
 	

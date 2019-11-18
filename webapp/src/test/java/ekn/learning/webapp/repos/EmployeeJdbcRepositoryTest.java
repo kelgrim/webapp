@@ -15,6 +15,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import ekn.learning.webapp.exceptions.EmployeeDeleteFromDbFailedException;
 import ekn.learning.webapp.exceptions.EmployeeNotFoundException;
+import ekn.learning.webapp.exceptions.EmployeeUpdateFailedException;
 import ekn.learning.webapp.exceptions.EmployeeWriteToDbFailedException;
 import ekn.learning.webapp.model.Employee;
 
@@ -27,6 +28,7 @@ public class EmployeeJdbcRepositoryTest {
 	
 	@Autowired
 	private EmployeeJdbcRepository repository;
+	
 	
 	@Test
 	public void findById_returnEmployee() {
@@ -104,6 +106,24 @@ public class EmployeeJdbcRepositoryTest {
 	@Test
 	public void deleteEmployee_throwException() {
 		assertThrows(EmployeeDeleteFromDbFailedException.class, () -> {repository.deleteEmployee(9999999);});
+	}
+	
+	@Test
+	public void updateEmployee_returnInt() {
+		Employee testEmployee = getTestEmployee();
+		testEmployee.setFirstName("First");
+		testEmployee.setLastName("Last");
+		testEmployee.setEmail("mail");
+		int employeeId = repository.addEmployee(testEmployee);
+		int updatedId = repository.updateEmployee(employeeId, getTestEmployee());
+		assertEquals(employeeId, updatedId);
+	}
+	
+	@Test
+	public void updateEmployee_throwException() {
+		
+		Employee employee = getTestEmployee();
+		assertThrows(EmployeeUpdateFailedException.class, () -> {repository.updateEmployee(99999, employee);} );
 	}
 			
 }

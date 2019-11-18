@@ -39,5 +39,10 @@ public class EmployeeController {
 	public int addEmployee(@RequestBody() Employee employee) {
 		return service.addEmployee(employee);	
 	}
+	
+	@RequestMapping(value = "/{id}", method = RequestMethod.PATCH)
+	public int updateEmployee(@PathVariable() Integer id, @RequestBody() Employee employee) {
+		return service.updateEmployee(id, employee);
+	}
 
 }

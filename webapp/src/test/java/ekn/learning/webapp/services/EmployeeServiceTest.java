@@ -18,6 +18,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import ekn.learning.webapp.exceptions.EmployeeDeleteFromDbFailedException;
 import ekn.learning.webapp.exceptions.EmployeeNotFoundException;
+import ekn.learning.webapp.exceptions.EmployeeUpdateFailedException;
 import ekn.learning.webapp.exceptions.EmployeeWriteToDbFailedException;
 import ekn.learning.webapp.model.Employee;
 import ekn.learning.webapp.repos.EmployeeJdbcRepository;
@@ -52,6 +53,9 @@ public class EmployeeServiceTest {
 	    	Mockito.when(repository.deleteEmployee(1)).thenReturn(1);
 	    	Mockito.when(repository.deleteEmployee(99901)).thenThrow(EmployeeDeleteFromDbFailedException.class);
 	    	
+	    	
+	    	Mockito.when(repository.updateEmployee(1, testEmployeeSuccess )).thenReturn(1);
+	    	Mockito.when(repository.updateEmployee(99901, testEmployeeException )).thenThrow(EmployeeUpdateFailedException.class);
 	    }
 	    
 	    @Test
@@ -90,5 +94,17 @@ public class EmployeeServiceTest {
 	    @Test
 	    public void deleteEmployee_throwException() {
 	    	assertThrows(EmployeeDeleteFromDbFailedException.class, () -> {service.deleteEmployee(99901);});
+	    }
+	    
+	    @Test
+	    public void updateEmployee_returnInt() {
+	    	int result = service.updateEmployee(1, testEmployeeSuccess);
+	    	assertEquals(1, result);
+	    }
+	    
+	    @Test
+	    public void updateEmployee_throwException() {
+	    	assertThrows(EmployeeUpdateFailedException.class, 
+	    			() -> {service.updateEmployee(99901, testEmployeeException);});
 	    }
 }
