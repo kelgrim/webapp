@@ -4,10 +4,6 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-
-import ekn.learning.webapp.exceptions.EmployeeNotFoundException;
 import ekn.learning.webapp.model.Employee;
 import ekn.learning.webapp.repos.EmployeeJdbcRepository;
 
@@ -40,8 +36,13 @@ public class EmployeeService {
 		int updatedId =  repository.updateEmployee(id, employee);
 		return repository.findById(updatedId);
 	}
+
+	//TODO: Delete this method. Added with IDEA to test making changes with different workstationss
+	public int testMethod(){
+		return 1;
+	}
 	
-	
+
 	
 	
 	
