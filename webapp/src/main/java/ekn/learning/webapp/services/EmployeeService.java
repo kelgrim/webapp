@@ -11,6 +11,7 @@ import ekn.learning.webapp.exceptions.EmployeeNotFoundException;
 import ekn.learning.webapp.model.Employee;
 import ekn.learning.webapp.repos.EmployeeJdbcRepository;
 
+
 @Service
 public class EmployeeService {
 
@@ -28,6 +29,10 @@ public class EmployeeService {
 	
 	public int addEmployee(Employee employee) {
 		return repository.addEmployee(employee);	
+	}
+
+	public Integer deleteEmployee(int id) {
+		return repository.deleteEmployee(id);
 	}
 	
 	

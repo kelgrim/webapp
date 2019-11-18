@@ -114,8 +114,6 @@ public class EmployeeJdbcRepository {
 			throw new EmployeeNotFoundException(id);
 			
 		}
-	
-
 		
 	}
 	
@@ -143,6 +141,8 @@ public class EmployeeJdbcRepository {
 			throw new EmployeeDeleteFromDbFailedException(id);
 		}
 	}
+	
+	
 	
 	
 }

@@ -4,6 +4,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import static ekn.learning.webapp.helpers.TestHelper.compare;
+import static ekn.learning.webapp.helpers.TestHelper.getTestEmployee;
+
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
@@ -18,15 +21,15 @@ import ekn.learning.webapp.model.Employee;
 @SpringBootTest
 public class EmployeeJdbcRepositoryTest {
 	
-	@Autowired
-	private EmployeeJdbcRepository repository;
-
 	/*
-	 * findById(id) tests
+	 * Note that these tests use the embedded database for the results. 
 	 */
 	
+	@Autowired
+	private EmployeeJdbcRepository repository;
+	
 	@Test
-	public void testFindByIdSucces() {
+	public void findById_returnEmployee() {
 		Employee employee = repository.findById(1);
 		
 		assertEquals(employee.getId() , new Integer(1));
@@ -36,49 +39,37 @@ public class EmployeeJdbcRepositoryTest {
 	}
 	
 	@Test
-	public void testFindByIdUnknownId() {
+	public void findById_throwException() {
 		assertThrows(EmployeeNotFoundException.class, () -> {repository.findById(99999);} );
 	}
-		
-	/*
-	 * addEmployee tests
-	 */
-	
 	
 	@Test
-	public void addEmployeeSuccess() {
+	public void addEmployee_returnEmployee() {
 		Employee employee = getTestEmployee();
 		int result = repository.addEmployee(employee);
 		assertTrue(result > 0);
 	}
 	
 	@Test
-	public void addEmployeeFailure() {
+	public void addEmployee_throwException() {
 		Employee employee = new Employee();
 		assertThrows(EmployeeWriteToDbFailedException.class, () -> {repository.addEmployee(employee);} ); 
 	}
 		
-	/*
-	 * addEmployee(String firstName, String lastName, String email) testcases
-	 */
 	
 	@Test
-	public void addEmployeeWithParamsSuccess() {
+	public void addEmployeeWithParams_returnEmployee() {
 		int result = repository.addEmployee("John", "Williams", "email@somewhere.nl");
 		assertTrue(result == 1);
 	}
 	
 	@Test
-	public void addEmployeeWithFailure() {
+	public void addEmployeeWithParams_throwException() {
 		assertThrows(EmployeeWriteToDbFailedException.class, () -> {repository.addEmployee(null,"","");});
 	}
 	
-	/* 
-	 * getEmployeeAlternative(int id) testcases; 
-	 */
-	
 	@Test
-	public void getEmployeeAlternativeSuccess() {
+	public void getEmployeeAlternative_returnEmployee() {
 		Employee employee = repository.getEmployeeAlternative(1);
 		assertEquals(employee.getId() , new Integer(1));
 		assertEquals(employee.getFirstName(), "Lokesh Local");
@@ -87,7 +78,7 @@ public class EmployeeJdbcRepositoryTest {
 	}
 	
 	@Test
-	public void getEmployeeAlternativeFailure() {
+	public void getEmployeeAlternative_throwException() {
 		assertThrows(EmployeeNotFoundException.class, () -> {repository.getEmployeeAlternative(9999999);} );
 	}
 	
@@ -95,7 +86,7 @@ public class EmployeeJdbcRepositoryTest {
 	//TODO: Find better (and more reliable) way to to compare the values in the list with
 	// data that is known to be in DB. 
 	@Test
-	public void getEmployeesSuccess() {
+	public void getEmployees_returnList() {
 		List<Employee> list = repository.getEmployees();
 		
 		assertTrue(compare(repository.findById(1), list.get(0) ) );
@@ -103,47 +94,16 @@ public class EmployeeJdbcRepositoryTest {
 		assertTrue(compare(repository.findById(3), list.get(2) ) );
 	}
 	
-	/*
-	 * Testcases for deleteEmployee(id)
-	 */
-	
 	@Test
-	public void deleteEmployeeSuccess() {
+	public void deleteEmployee_returnInt() {
 		int id = repository.addEmployee(getTestEmployee() );
 		int result = repository.deleteEmployee(id);
 		assertTrue(result > 0);
 	}
 	
 	@Test
-	public void deleteEmployeeFailed() {
+	public void deleteEmployee_throwException() {
 		assertThrows(EmployeeDeleteFromDbFailedException.class, () -> {repository.deleteEmployee(9999999);});
 	}
-		
-	/* 
-	 * Helper functions
-	 */
-	
-	//Just get a random employee quickly
-	private Employee getTestEmployee() {
-		Employee employee = new Employee();
-		employee.setFirstName("test");
-		employee.setLastName("last test");
-		employee.setEmail("email");
-		return employee;
-	}
-	
-	//Compare two employees. This because usually they are not the same objects
-	private boolean compare(Employee a, Employee b) {
-		
-		System.out.println("Comparing" + a.toString() + " with "+ b.toString() );
-		boolean same = true;
-		if (!a.getFirstName().equals(b.getFirstName() ) ) 	 same = false;
-		if (!a.getLastName().equals(b.getLastName() ) ) 	 same = false;
-		if (!a.getLastName().equals(b.getLastName() ) ) 	 same = false;
-		
-		return same;
-	}
-	
-	
-	
+			
 }

@@ -33,43 +33,11 @@ public class EmployeeController {
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public Employee getEmployee(@PathVariable() Integer id) {
 			  return service.getEmployee(id);
-
 	}
 	
 	@RequestMapping(method = RequestMethod.POST)
 	public int addEmployee(@RequestBody() Employee employee) {
 		return service.addEmployee(employee);	
 	}
-	
-	
-	//TODO: Verwijderen van deze functie. Is alleen voor testen
-	@RequestMapping(value = "/test", method = RequestMethod.GET)
-	public Map getStuff() {
-		Employee employee = new Employee();
-		employee.setId(28);
-		employee.setFirstName("testname");
-		employee.setLastName("Test last name");
-		employee.setEmail("email");
-		//Faculty faculty = new Faculty();
-		//faculty.setId(21);
-		//faculty.setName("Test faculty");
-		
-		Map<String, Object> map = new HashMap<>();
-		map.put("employee", employee);
-		//map.put("faculty", faculty);
-		return map;
-		
-		//ExceptionHandlingController exception = new ExceptionHandlingController();
-		//throw exception.handleError("/test", Exception.);
-	
-		
-	}
-	
-	
-	@RequestMapping(value = "/error", method = RequestMethod.GET)
-	public String doError() {
-		//throw new EmployeeNotFoundException(1);
-		throw new EmployeeInvalidArgumentsException();
-	}
-	
+
 }
