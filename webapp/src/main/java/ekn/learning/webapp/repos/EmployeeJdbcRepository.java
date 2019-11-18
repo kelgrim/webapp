@@ -136,14 +136,13 @@ public class EmployeeJdbcRepository {
 			else return result;
 		}
 		catch (Exception e) {
-			e.printStackTrace();
+			//e.printStackTrace();
 			throw new EmployeeDeleteFromDbFailedException(id);
 		}
 	}
 
 	public int updateEmployee(int id, Employee employee) throws EmployeeUpdateFailedException {
 		try {
-			//KeyHolder keyHolder = new GeneratedKeyHolder();
 			String query = String.format(
 					"update tbl_employees "
 					+ "set "
@@ -152,9 +151,6 @@ public class EmployeeJdbcRepository {
 					+ "email = '%s' "
 					+ "where id = %s;", employee.getFirstName(), employee.getLastName(), employee.getEmail(), id);
 			
-			System.out.println("---- Update query -----");
-			System.out.println(query);
-			System.out.println("---- Update query -----");
 			int result = jdbcTemplate.update(query);	
 			if (result == 0) throw new EmployeeUpdateFailedException(id);
 			else	return id;
