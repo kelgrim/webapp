@@ -23,7 +23,7 @@ import java.util.stream.Collectors;
 @ControllerAdvice
 public class CustomGlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
-	  @ExceptionHandler(EmployeeNotFoundException.class)
+	  @ExceptionHandler(UserNotFoundException.class)
 	  public ResponseEntity<CustomErrorResponse> customHandleNotFound(Exception ex, WebRequest request) {
 
 	        CustomErrorResponse errors = new CustomErrorResponse();
@@ -36,7 +36,7 @@ public class CustomGlobalExceptionHandler extends ResponseEntityExceptionHandler
 	    }
 	  
 	  
-	  @ExceptionHandler(EmployeeInvalidArgumentsException.class)
+	  @ExceptionHandler(UserInvalidArgumentsException.class)
 	  public void constraintViolationException (HttpServletResponse response) throws IOException{
 		  response.sendError(HttpStatus.BAD_REQUEST.value());
 	  }

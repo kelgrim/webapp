@@ -1,15 +1,15 @@
-INSERT INTO TBL_EMPLOYEES (first_name, last_name, email) VALUES
-  ('Lokesh Local', 'Gupta', 'abc@gmail.com'),
-  ('Deja Local', 'Vu', 'xyz@email.com'),
-  ('Caption Local', 'America', 'cap@marvel.com');
+INSERT INTO TBL_USERS (username, description, email) VALUES
+  ('Kelgrim', 'Developer of this Rest service', 'abc@gmail.com'),
+  ('Dolphin', 'Just another testuser', 'xyz@email.com'),
+  ('Barney', 'Stole captain marvels email address', 'cap@marvel.com');
 
 INSERT INTO TBL_MESSAGES (SENDER_ID, RECIPIENT_ID, MESSAGE_TEXT)
 VALUES 
-	(1,3,'Lokesh sends message to Caption'),
-	(2,3,'Deja sends message to Caption'),
-	(3,1,'Caption sends message to Lokesh'),
-	(3,1,'Caption sends another message to Lokesh'),
-	(3,1,'Caption sends yet another message to Lokesh');
+	(1,3,'Kelgrim sends message to Barney'),
+	(2,3,'Dolphin sends message to Barney'),
+	(3,1,'Barney sends message to Kelgrim'),
+	(3,1,'Barney sends another message to Kelgrim'),
+	(3,1,'Barney sends yet another message to Kelgrim');
 
 
 

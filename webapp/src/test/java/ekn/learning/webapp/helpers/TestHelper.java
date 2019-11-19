@@ -2,28 +2,26 @@ package ekn.learning.webapp.helpers;
 
 import java.sql.Timestamp;
 
-import ekn.learning.webapp.model.Employee;
+import ekn.learning.webapp.model.User;
 import ekn.learning.webapp.model.Message;
 
 public class TestHelper {
-	//Just get a random employee quickly
-	public static Employee getTestEmployee() {
-		Employee employee = new Employee();
-		employee.setFirstName("Employee First Name");
-		employee.setLastName("Employee Last Name");
-		employee.setEmail("Employee Email");
-		return employee;
+
+	public static User getTestUser() {
+		User user = new User();
+		user.setUsername("Username");
+		user.setDescription("User Description");
+		user.setEmail("User@Email.com");
+		return user;
 	}
 	
-	
-	//Compare two employees. This because usually they are not the same objects
-	public static boolean compareEmployee(Employee a, Employee b) {
+	//Compare two users. This because usually they are not the same objects
+	public static boolean compareUser(User a, User b) {
 		
-		//System.out.println("Comparing" + a.toString() + " with "+ b.toString() );
 		boolean same = true;
-		if (!a.getFirstName().equals(b.getFirstName() ) ) 	 same = false;
-		if (!a.getLastName().equals(b.getLastName() ) ) 	 same = false;
-		if (!a.getLastName().equals(b.getLastName() ) ) 	 same = false;
+		if (!a.getUsername().equals(b.getUsername() ) ) 	 	same = false;
+		if (!a.getDescription().equals(b.getDescription() ) ) 	same = false;
+		if (!a.getEmail().equals(b.getEmail() ) ) 	 			same = false;
 		
 		return same;
 	}
@@ -33,7 +31,7 @@ public class TestHelper {
 		msg.setId(1);
 		msg.setSenderId(1);
 		msg.setRecipientId(3);
-		msg.setMessageText("Lokesh sends message to Caption");
+		msg.setMessageText("Kelgrim sends message to Barney");
 		msg.setMessageRead(false);
 		msg.setMessageTimeStamp(new Timestamp(123498712L));
 		
@@ -43,9 +41,6 @@ public class TestHelper {
 	
 	public static boolean compareMessage(Message a, Message b, boolean testTimeStamp) {
 		
-		//System.out.println("--- Comparing the below messages ---");
-		//System.out.println(a.toString());
-		//System.out.println(b.toString());
 		boolean same = true;
 		if (a.getId() != b.getId())								same = false;
 		if (a.getRecipientId() != b.getRecipientId() )  		same = false;	

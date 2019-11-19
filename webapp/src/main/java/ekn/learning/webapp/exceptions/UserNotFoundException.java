@@ -1,8 +1,8 @@
 package ekn.learning.webapp.exceptions;
 
-public class EmployeeNotFoundException extends RuntimeException {
+public class UserNotFoundException extends RuntimeException {
 
-    public EmployeeNotFoundException(int id) {
+    public UserNotFoundException(int id) {
         super("The searched for Id is not found : " + id);
     }
 

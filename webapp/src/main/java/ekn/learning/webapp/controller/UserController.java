@@ -9,39 +9,39 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import ekn.learning.webapp.model.Employee;
-import ekn.learning.webapp.services.EmployeeService;
+import ekn.learning.webapp.model.User;
+import ekn.learning.webapp.services.UserService;
 
 @RestController
-@RequestMapping(value = "/employee") 
-public class EmployeeController {
+@RequestMapping(value = "/user") 
+public class UserController {
 	
 	@Autowired
-	private EmployeeService service;
+	private UserService service;
 	
 	@RequestMapping(method = RequestMethod.GET)
-	public List<Employee> getEmployees(){
-		return service.getEmployees();
+	public List<User> getUsers(){
+		return service.getUsers();
 	}
 	
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
-	public Employee getEmployee(@PathVariable() Integer id) {
-			  return service.getEmployee(id);
+	public User getUser(@PathVariable() Integer id) {
+			  return service.getUser(id);
 	}
 	
 	@RequestMapping(method = RequestMethod.POST)
-	public Employee addEmployee(@RequestBody() Employee employee) {
-		return service.addEmployee(employee);	
+	public User addUser(@RequestBody() User user) {
+		return service.addUser(user);	
 	}
 	
 	@RequestMapping(value = "/{id}", method = RequestMethod.PATCH)
-	public Employee updateEmployee(@PathVariable() Integer id, @RequestBody() Employee employee) {
-		return service.updateEmployee(id, employee);
+	public User updateUser(@PathVariable() Integer id, @RequestBody() User user) {
+		return service.updateUser(id, user);
 	}
 	
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-	public int deleteEmployee(@PathVariable() Integer id) {
-		return service.deleteEmployee(id);
+	public int deleteUser(@PathVariable() Integer id) {
+		return service.deleteUser(id);
 	}
 	
 }
