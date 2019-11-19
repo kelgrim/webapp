@@ -10,8 +10,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import ekn.learning.webapp.model.Employee;
-import ekn.learning.webapp.model.Message;
-import ekn.learning.webapp.repos.TimestampTestClass;
 import ekn.learning.webapp.services.EmployeeService;
 
 @RestController
@@ -20,10 +18,6 @@ public class EmployeeController {
 	
 	@Autowired
 	private EmployeeService service;
-	
-	//TODO: Remove the messageRep, only added for quick test
-	@Autowired
-	private TimestampTestClass messageRepo;
 	
 	@RequestMapping(method = RequestMethod.GET)
 	public List<Employee> getEmployees(){
@@ -50,12 +44,4 @@ public class EmployeeController {
 		return service.deleteEmployee(id);
 	}
 	
-	//TODO: Remove this mapping
-	@RequestMapping(value = "/test", method = RequestMethod.GET)
-	public Message testTimeStamp() {
-		//messageRepo.getTimeStamp(1);
-		Message message = messageRepo.getMessage(1);
-		return message;
-	}
-
 }

@@ -14,7 +14,6 @@ public class EmployeeService {
 	@Autowired
 	private EmployeeJdbcRepository repository;
 	
-	//TODO: Return the employee instead of the Id
 	public Employee getEmployee(int id) {
 		return  repository.findById(id);
 	}
@@ -35,15 +34,6 @@ public class EmployeeService {
 	public Employee updateEmployee(int id, Employee employee) {
 		int updatedId =  repository.updateEmployee(id, employee);
 		return repository.findById(updatedId);
-	}
-
-	//TODO: Delete this method. Added with IDEA to test making changes with different workstationss
-	public int testMethod(){
-		return 1;
-	}
-	
-
-	
-	
+	}	
 	
 }

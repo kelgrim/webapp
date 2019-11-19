@@ -121,7 +121,6 @@ public class MessageJdbcRepository {
 					+ "where id = " + messageId;
 			
 			int result = jdbcTemplate.update(sql);
-			System.out.println("Result for id: " + messageId + " is: " + result );
 			if (result == 0) throw new MessageNotFoundException(messageId);
 			
 			return result;

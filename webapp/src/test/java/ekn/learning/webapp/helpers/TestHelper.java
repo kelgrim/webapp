@@ -1,5 +1,7 @@
 package ekn.learning.webapp.helpers;
 
+import java.sql.Timestamp;
+
 import ekn.learning.webapp.model.Employee;
 import ekn.learning.webapp.model.Message;
 
@@ -33,6 +35,7 @@ public class TestHelper {
 		msg.setRecipientId(3);
 		msg.setMessageText("Lokesh sends message to Caption");
 		msg.setMessageRead(false);
+		msg.setMessageTimeStamp(new Timestamp(123498712L));
 		
 		return msg;
 		

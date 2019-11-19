@@ -84,7 +84,6 @@ public class EmployeeJdbcRepositoryTest {
 		assertThrows(EmployeeNotFoundException.class, () -> {repository.getEmployeeAlternative(9999999);} );
 	}
 	
-	//TODO: List<Employee> getEmployees(){
 	//TODO: Find better (and more reliable) way to to compare the values in the list with
 	// data that is known to be in DB. 
 	@Test

@@ -2,7 +2,6 @@ package ekn.learning.webapp.repos;
 
 import static ekn.learning.webapp.helpers.TestHelper.compareMessage;
 import static ekn.learning.webapp.helpers.TestHelper.getTestMessage;
-//import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -115,4 +114,6 @@ public class MessageJdbcRepositoryTest {
 	public void deleteMessage_throwException() {
 		assertThrows(MessageNotFoundException.class, () -> {repository.deleteMessage(99901);});
 	}
+	
+	
 }

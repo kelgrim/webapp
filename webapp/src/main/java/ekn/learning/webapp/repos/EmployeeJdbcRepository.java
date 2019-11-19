@@ -77,7 +77,6 @@ public class EmployeeJdbcRepository {
 			throw new EmployeeWriteToDbFailedException();
 		}
 		
-		//TODO: change cast to int to something better. 
 		return (int) keyHolder.getKey();
 	}
 	
