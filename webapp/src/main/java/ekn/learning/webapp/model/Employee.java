@@ -7,7 +7,6 @@ public class Employee {
 	private String firstName;
 	private String lastName;
 	private String email;
-//	private Department[] departments;
 	
 	public Employee() {
 		super();
@@ -49,12 +48,4 @@ public class Employee {
 		return firstName + " " + lastName + " " + email;
 	}
 	
-	/*public Department[] getDepartments() {
-		return departments;
-	}
-	
-	public void setDepartments(Department[] departments) {
-		this.departments = departments;
-	}	
-	*/
 }

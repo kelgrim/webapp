@@ -24,8 +24,6 @@ import ekn.learning.webapp.exceptions.EmployeeUpdateFailedException;
 import ekn.learning.webapp.exceptions.EmployeeWriteToDbFailedException;
 import ekn.learning.webapp.model.Employee;
 
-//TODO: Add update method. 
-
 @Repository
 public class EmployeeJdbcRepository {
 	@Autowired
@@ -159,8 +157,5 @@ public class EmployeeJdbcRepository {
 			throw new EmployeeUpdateFailedException(id);
 		}
 	}
-	
-	
-	
-	
+		
 }

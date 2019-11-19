@@ -1,10 +1,6 @@
 package ekn.learning.webapp.controller;
 
-//Top level path = /api/v1, configured in application.properties
-
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -12,10 +8,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-import ekn.learning.webapp.exceptions.EmployeeInvalidArgumentsException;
+
 import ekn.learning.webapp.model.Employee;
-
-
+import ekn.learning.webapp.model.Message;
+import ekn.learning.webapp.repos.TimestampTestClass;
 import ekn.learning.webapp.services.EmployeeService;
 
 @RestController
@@ -24,6 +20,10 @@ public class EmployeeController {
 	
 	@Autowired
 	private EmployeeService service;
+	
+	//TODO: Remove the messageRep, only added for quick test
+	@Autowired
+	private TimestampTestClass messageRepo;
 	
 	@RequestMapping(method = RequestMethod.GET)
 	public List<Employee> getEmployees(){
@@ -48,6 +48,14 @@ public class EmployeeController {
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
 	public int deleteEmployee(@PathVariable() Integer id) {
 		return service.deleteEmployee(id);
+	}
+	
+	//TODO: Remove this mapping
+	@RequestMapping(value = "/test", method = RequestMethod.GET)
+	public Message testTimeStamp() {
+		//messageRepo.getTimeStamp(1);
+		Message message = messageRepo.getMessage(1);
+		return message;
 	}
 
 }

@@ -4,7 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import static ekn.learning.webapp.helpers.TestHelper.compare;
+import static ekn.learning.webapp.helpers.TestHelper.compareEmployee;
 import static ekn.learning.webapp.helpers.TestHelper.getTestEmployee;
 
 import java.util.List;
@@ -91,9 +91,9 @@ public class EmployeeJdbcRepositoryTest {
 	public void getEmployees_returnList() {
 		List<Employee> list = repository.getEmployees();
 		
-		assertTrue(compare(repository.findById(1), list.get(0) ) );
-		assertTrue(compare(repository.findById(2), list.get(1) ) );
-		assertTrue(compare(repository.findById(3), list.get(2) ) );
+		assertTrue(compareEmployee(repository.findById(1), list.get(0) ) );
+		assertTrue(compareEmployee(repository.findById(2), list.get(1) ) );
+		assertTrue(compareEmployee(repository.findById(3), list.get(2) ) );
 	}
 	
 	@Test

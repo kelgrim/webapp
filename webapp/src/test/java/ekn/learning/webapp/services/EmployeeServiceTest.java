@@ -1,6 +1,6 @@
 package ekn.learning.webapp.services;
 
-import static ekn.learning.webapp.helpers.TestHelper.compare;
+import static ekn.learning.webapp.helpers.TestHelper.compareEmployee;
 import static ekn.learning.webapp.helpers.TestHelper.getTestEmployee;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -63,7 +63,7 @@ public class EmployeeServiceTest {
 	    @Test
 	    public void getEmployee_returnEmployee() {
 	    	Employee employee = service.getEmployee(1); //repository.findById(999); //
-	    	assertTrue(compare(getTestEmployee(), employee) );
+	    	assertTrue(compareEmployee(getTestEmployee(), employee) );
 	    }
 	    
 	    @Test
@@ -74,7 +74,7 @@ public class EmployeeServiceTest {
 	    @Test
 	    public void getEmployees_returnEmployees() {
 	    	List<Employee> l = service.getEmployees();
-	    	assertTrue(compare(getTestEmployee(),l.get(0)) );
+	    	assertTrue(compareEmployee(getTestEmployee(),l.get(0)) );
 	    }
 	    
 	    @Test

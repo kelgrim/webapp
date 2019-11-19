@@ -4,13 +4,14 @@ INSERT INTO TBL_EMPLOYEES (first_name, last_name, email) VALUES
   ('Caption Local', 'America', 'cap@marvel.com');
 
 INSERT INTO TBL_MESSAGES (SENDER_ID, RECIPIENT_ID, MESSAGE_TEXT)
-VALUES (1,3,'Lokesh sends message to Caption');
+VALUES 
+	(1,3,'Lokesh sends message to Caption'),
+	(2,3,'Deja sends message to Caption'),
+	(3,1,'Caption sends message to Lokesh'),
+	(3,1,'Caption sends another message to Lokesh'),
+	(3,1,'Caption sends yet another message to Lokesh');
 
-INSERT INTO TBL_MESSAGES (SENDER_ID, RECIPIENT_ID, MESSAGE_TEXT)
-VALUES (2,3,'Deja sends message to Caption');
 
-INSERT INTO TBL_MESSAGES (SENDER_ID, RECIPIENT_ID, MESSAGE_TEXT)
-VALUES (3,1,'Caption sends message to Lokeshs');
 
 
 

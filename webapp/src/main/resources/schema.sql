@@ -15,5 +15,6 @@ CREATE TABLE TBL_MESSAGES (
     recipient_id INT,
     FOREIGN KEY (recipient_id) REFERENCES TBL_EMPLOYEES(ID),
     message_text VARCHAR(2048) DEFAULT NULL,
+    message_read BOOLEAN DEFAULT FALSE,
 	message_timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
