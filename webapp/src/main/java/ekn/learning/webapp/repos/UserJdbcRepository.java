@@ -148,11 +148,13 @@ public class UserJdbcRepository {
 					+ "email = '%s' "
 					+ "where id = %s;", user.getUsername(), user.getDescription(), user.getEmail(), id);
 			
+			//System.out.println(sql);
 			int result = jdbcTemplate.update(query);	
 			if (result == 0) throw new UserUpdateFailedException(id);
 			else	return id;
 		}
-		catch (Exception e) {
+		catch (DataIntegrityViolationException e) {
+			//e.printStackTrace();
 			throw new UserUpdateFailedException(id);
 		}
 	}

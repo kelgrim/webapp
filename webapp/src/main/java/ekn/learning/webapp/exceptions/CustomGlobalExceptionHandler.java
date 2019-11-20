@@ -35,7 +35,6 @@ public class CustomGlobalExceptionHandler extends ResponseEntityExceptionHandler
 
 	    }
 	  
-	  
 	  @ExceptionHandler(UserInvalidArgumentsException.class)
 	  public void constraintViolationException (HttpServletResponse response) throws IOException{
 		  response.sendError(HttpStatus.BAD_REQUEST.value());

@@ -47,16 +47,20 @@ public class MessageServiceTest {
 		Mockito.when(repository.findMessageById(99901)).thenThrow(MessageNotFoundException.class);
 		
 		Mockito.when(repository.getUserInbox(1)).thenReturn(messageList);
-		Mockito.when(repository.getUserInbox(99901)).thenThrow(MessageNotFoundForUserException.class);
+		Mockito.when(repository.getUserInbox(99902)).thenThrow(MessageNotFoundForUserException.class);
 		
 		Mockito.when(repository.getUserSentMessages(1)).thenReturn(messageList);
-		Mockito.when(repository.getUserSentMessages(99901)).thenThrow(MessageNotFoundForUserException.class);
+		Mockito.when(repository.getUserSentMessages(99903)).thenThrow(MessageNotFoundForUserException.class);
 		
 		Mockito.when(repository.insertMessage(testMessageSuccess)).thenReturn(1);
 		Mockito.when(repository.insertMessage(testMessageFail)).thenThrow(MessageInvalidArgumentsException.class);
 		
 		Mockito.when(repository.deleteMessage(1)).thenReturn(1);
-		Mockito.when(repository.deleteMessage(99901)).thenThrow(MessageNotFoundException.class);
+		Mockito.when(repository.deleteMessage(99904)).thenThrow(MessageNotFoundException.class);
+		
+		Mockito.when(repository.updateMessage(1, testMessageSuccess)).thenReturn(1);
+		Mockito.when(repository.updateMessage(99905, testMessageFail)).thenThrow(MessageNotFoundException.class);
+		Mockito.when(repository.updateMessage(99906, testMessageFail)).thenThrow(MessageInvalidArgumentsException.class);
 	}
 	
 	@Test
@@ -78,7 +82,7 @@ public class MessageServiceTest {
 	
 	@Test
 	public void getInbox_throwError() {
-		assertThrows(MessageNotFoundForUserException.class, () -> {service.getInbox(99901);});
+		assertThrows(MessageNotFoundForUserException.class, () -> {service.getInbox(99902);});
 	}
 	
 	@Test
@@ -89,7 +93,7 @@ public class MessageServiceTest {
 	
 	@Test
 	public void getSentItems_throwError() {
-		assertThrows(MessageNotFoundForUserException.class, () -> {service.getSentItems(99901);});
+		assertThrows(MessageNotFoundForUserException.class, () -> {service.getSentItems(99903);});
 	}
 	
 	@Test
@@ -111,7 +115,23 @@ public class MessageServiceTest {
 	
 	@Test
 	public void deleteMessage_throwException() {
-		assertThrows(MessageNotFoundException.class, () -> {service.deleteMessage(99901);});
+		assertThrows(MessageNotFoundException.class, () -> {service.deleteMessage(99904);});
+	}
+	
+	@Test
+	public void updateMessage_returnMessage() {
+		Message actualMessage = service.updateMessage(1, testMessageSuccess);
+		assertEquals(testMessageSuccess, actualMessage);
+	}
+	
+	@Test
+	public void updateMessage_throwMessageNotFound() {
+		assertThrows(MessageNotFoundException.class, () -> {service.updateMessage(99905, testMessageFail);});
+	}
+	
+	@Test
+	public void updateMessage_throwMessageInvalidArgumentsException() {
+		assertThrows(MessageInvalidArgumentsException.class, () -> {service.updateMessage(99906,  testMessageFail);});
 	}
 	
 }

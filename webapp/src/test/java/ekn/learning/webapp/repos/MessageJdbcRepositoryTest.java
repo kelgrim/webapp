@@ -115,5 +115,37 @@ public class MessageJdbcRepositoryTest {
 		assertThrows(MessageNotFoundException.class, () -> {repository.deleteMessage(99901);});
 	}
 	
+	@Test
+	public void updateMessage_returnMessage() {
+		Message testMsg = new Message();
+		testMsg.setMessageText("TestMessage for unit test");
+		testMsg.setSenderId(2);
+		testMsg.setRecipientId(1);
+		
+		Message updateMsg = new Message();
+		updateMsg.setMessageText("TestMessage for unit test update");
+		updateMsg.setSenderId(3);
+		updateMsg.setRecipientId(2);
+		
+		int messageToUpdateId = repository.insertMessage(testMsg);
+		updateMsg.setId(messageToUpdateId);
+		int updateResultInt = repository.updateMessage(messageToUpdateId, updateMsg);
+		Message actualUpdatedMessage = repository.findMessageById(messageToUpdateId);
+		repository.deleteMessage(messageToUpdateId);
+		
+		assertTrue(updateResultInt > 0);
+		assertTrue(compareMessage(updateMsg, actualUpdatedMessage, false));
+		
+	}
+	
+	@Test
+	public void updateMessage_throwNotFoundException() {
+		assertThrows(MessageNotFoundException.class, () -> {repository.updateMessage(999999, getTestMessage());});
+	}
+	
+	@Test
+	public void updateMessage_throwIllegalArgument() {
+		assertThrows(MessageInvalidArgumentsException.class, () -> {repository.updateMessage(1, new Message());});
+	}
 	
 }

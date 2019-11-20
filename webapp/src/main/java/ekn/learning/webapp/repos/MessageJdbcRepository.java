@@ -110,7 +110,29 @@ public class MessageJdbcRepository {
 	
 	//TODO: Implement update functionality
 	public int updateMessage(int messageId, Message message) {
-		return 0;
+		try {
+			String sql = String.format(""
+					+ "update tbl_messages "
+					+ "set "
+					+ "sender_id 	= %s, "
+					+ "recipient_id = %s, "
+					+ "message_text = '%s' "
+					+ ""
+					+ "where id 	= %s"
+					, message.getSenderId(), message.getRecipientId(), 
+					message.getMessageText(), messageId);
+			
+			System.out.println(sql);
+			int result = jdbcTemplate.update(sql);
+			if (result <= 0) throw new MessageNotFoundException(messageId);
+			return result;
+			
+		}
+		catch(DataIntegrityViolationException e) {
+			e.printStackTrace();
+			throw new MessageInvalidArgumentsException(message);
+		}
+		
 	}
 	
 	
@@ -126,7 +148,7 @@ public class MessageJdbcRepository {
 			return result;
 		}
 		catch (RuntimeException e) {
-			e.printStackTrace();
+			//e.printStackTrace();
 			throw new MessageNotFoundException(messageId);
 		}
 	}

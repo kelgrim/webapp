@@ -34,4 +34,9 @@ public class MessageService {
 	public int deleteMessage(int messageId) {
 		return repository.deleteMessage(messageId);
 	}
+
+	public Message updateMessage(int messageId, Message updateMessage) {
+		repository.updateMessage(messageId, updateMessage);
+		return repository.findMessageById(messageId);
+	}
 }
