@@ -26,6 +26,21 @@
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
 		
+		<!-- Rest assured for testing API. Note that it must be declared before Junit -->
+	    <dependency>	
+		      <groupId>io.rest-assured</groupId>
+		      <artifactId>rest-assured</artifactId>
+		      <version>4.1.2</version>
+		      <scope>test</scope>
+		</dependency> 
+		
+		<dependency>
+		   <groupId>io.rest-assured</groupId>
+		   <artifactId>rest-assured-all</artifactId>
+		   <version>4.0.0</version>
+		</dependency>
+		
+		
 		<!--  JUnit 5 and Mockito  -->
 		<dependency>
 		    <groupId>org.junit.jupiter</groupId>
@@ -126,60 +141,5 @@
 			</plugin>
 		</plugins>
 	</build>
-	
-	<!--  Old imports probably save to delete -->
-	
-			<!--  jUnit and other test dependencies -->
-		<!-- Had to be added due to bug in this eclipse version -->
-		<!-- https://mvnrepository.com/artifact/org.junit.platform/junit-platform-launcher -->
-	   <!--   	<dependency>
-		    <groupId>org.junit.platform</groupId>
-		    <artifactId>junit-platform-launcher</artifactId>
-		    <version>1.5.1</version>
-		    <scope>test</scope>
-		</dependency> 
-
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-test</artifactId>
-			<scope>test</scope>
-			<exclusions>
-				<exclusion>
-					<groupId>org.junit.vintage</groupId>
-					<artifactId>junit-vintage-engine</artifactId>
-				</exclusion>
-			</exclusions>
-		</dependency>
-		-->
-		
-		<!-- https://mvnrepository.com/artifact/org.mockito/mockito-core -->
-		<!-- <dependency>
-		    <groupId>org.mockito</groupId>
-		    <artifactId>mockito-core</artifactId>
-		    <version>3.0.0</version>
-		    <scope>test</scope>
-		</dependency>
-		-->
-		
-		
-		<!-- https://mvnrepository.com/artifact/org.mockito/mockito-all -->
-		<!--   <dependency>
-		    <groupId>org.mockito</groupId>
-		    <artifactId>mockito-all</artifactId>
-		    <version>1.10.19</version>
-		    <scope>test</scope>
-		</dependency>
-		-->
-		
-		
-		<!-- https://mvnrepository.com/artifact/org.hamcrest/hamcrest-all -->
-		<!-- Removed dependency with hamcrest, because it was unneeded.    
-		<dependency>
-		    <groupId>org.hamcrest</groupId>
-		    <artifactId>hamcrest-all</artifactId>
-		    <version>1.3</version>
-		    <scope>test</scope>
-			</dependency>
-		-->
 
 </project>
