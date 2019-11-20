@@ -129,7 +129,7 @@ public class MessageJdbcRepository {
 			
 		}
 		catch(DataIntegrityViolationException e) {
-			e.printStackTrace();
+			//e.printStackTrace();
 			throw new MessageInvalidArgumentsException(message);
 		}
 		
