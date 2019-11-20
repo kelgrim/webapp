@@ -1,11 +1,10 @@
 package ekn.learning.webapp.repos;
 
+import static ekn.learning.webapp.helpers.TestHelper.compareUser;
+import static ekn.learning.webapp.helpers.TestHelper.getTestUser;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-
-import static ekn.learning.webapp.helpers.TestHelper.compareUser;
-import static ekn.learning.webapp.helpers.TestHelper.getTestUser;
 
 import java.util.List;
 
@@ -14,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import ekn.learning.webapp.exceptions.UserDeleteFromDbFailedException;
+import ekn.learning.webapp.exceptions.UserInvalidArgumentsException;
 import ekn.learning.webapp.exceptions.UserNotFoundException;
 import ekn.learning.webapp.exceptions.UserUpdateFailedException;
 import ekn.learning.webapp.exceptions.UserWriteToDbFailedException;
@@ -123,6 +123,13 @@ public class UserJdbcRepositoryTest {
 		
 		User user = getTestUser();
 		assertThrows(UserUpdateFailedException.class, () -> {repository.updateUser(99999, user);} );
+	}
+	
+	@Test
+	public void updateUser_throwInvalidArgumentsException() {
+		
+		User user = new User();
+		assertThrows(UserInvalidArgumentsException.class, () -> {repository.updateUser(1, user);} );
 	}
 			
 }

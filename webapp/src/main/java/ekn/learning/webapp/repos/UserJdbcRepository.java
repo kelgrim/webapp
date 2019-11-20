@@ -19,6 +19,7 @@ import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
 import ekn.learning.webapp.exceptions.UserDeleteFromDbFailedException;
+import ekn.learning.webapp.exceptions.UserInvalidArgumentsException;
 import ekn.learning.webapp.exceptions.UserNotFoundException;
 import ekn.learning.webapp.exceptions.UserUpdateFailedException;
 import ekn.learning.webapp.exceptions.UserWriteToDbFailedException;
@@ -140,6 +141,8 @@ public class UserJdbcRepository {
 	
 	public int updateUser(int id, User user) throws UserUpdateFailedException {
 		try {
+			if (user.getUsername() == null) throw new UserInvalidArgumentsException(user);
+			
 			String query = String.format(
 					"update tbl_users "
 					+ "set "
