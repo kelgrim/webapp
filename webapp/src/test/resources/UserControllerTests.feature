@@ -50,9 +50,31 @@ Feature: Testing the Rest API for users
     When that user makes a DELETE Request
     Then the service returns statuscode 200
     And the service returns a ServiceResponseMessage with operation "Delete User"
-    
-    Scenario: Delete user - deletion failed
+
+  Scenario: Delete user - deletion failed
     Given the user of the service wants to send a request to URL "/api/v1/user"
     And the user provides id 99901
     When that user makes a DELETE Request
     Then the service returns statuscode 404
+
+  Scenario: Update user - succesful update
+    Given the user of the service wants to send a request to URL "/api/v1/user"
+    And the user provides an existing id
+    When that user provides correct values for  "username", "description" and "email"
+    And that user makes a PUT Request
+    Then the service returns statuscode 200
+    And the response contains the correct values for the updated user
+
+  Scenario: Update user - update failed - invalid id
+    Given the user of the service wants to send a request to URL "/api/v1/user"
+    And the user provides id 99901
+    When that user provides correct values for  "username", "description" and "email"
+    And that user makes a PUT Request
+    Then the service returns statuscode 404
+
+  Scenario: Update user - update fails because of invalid id
+    Given the user of the service wants to send a request to URL "/api/v1/user"
+    And the user provides an existing id
+    When that user provides an incorrect value for the username
+    And that user makes a PUT Request
+    Then the service returns statuscode 400

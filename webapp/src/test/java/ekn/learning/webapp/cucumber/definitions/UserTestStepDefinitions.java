@@ -66,7 +66,7 @@ public class UserTestStepDefinitions {
 					getId();
 		url = url + "/" + idToDelete;		
 	}
-
+	
 	@When("that user provides correct values for  {string}, {string} and {string}")
 	public void that_user_provides_correct_values_for_and(String username, String description, String email) {
 	    user.setUsername(username);
@@ -78,7 +78,7 @@ public class UserTestStepDefinitions {
 	
 	@When("that user provides an incorrect value for the username")
 	public void that_user_provides_an_incorrect_value_for_the_username() {
-	  //username remains null
+	  user.setUsername(null);
 	  user.setDescription("will fail: description");
 	  user.setEmail("will fail: email");
 	}
@@ -101,6 +101,19 @@ public class UserTestStepDefinitions {
 	@When("that user makes a DELETE Request")
 	public void that_user_makes_a_DELETE_Request() {
 		response = delete(url);
+	}
+	
+	@When("that user makes a PUT Request")
+	public void that_user_makes_a_PUT_Request() {
+		response =
+	    	given().
+				contentType("application/json").
+				body(user).
+			when().
+	        	put(url);
+		System.out.println("--- Response as String ---");
+		System.out.println(response.asString());
+		System.out.println("The corresponding status: " + response.getStatusCode());
 	}
 
 	@Then("the service will return a Json with that same data")
@@ -136,6 +149,12 @@ public class UserTestStepDefinitions {
 	    // Write code here that turns the phrase above into concrete actions
 	   ServiceResponseMessage srm =  response.as(ServiceResponseMessage.class);
 	   assertEquals(operation, srm.getOperation() );
+	}
+	
+	@Then("the response contains the correct values for the updated user")
+	public void the_response_contains_the_correct_values_for_the_updated_user() {
+	  User adjustedUser = response.as(User.class);
+	  assertTrue(compareUser(user, adjustedUser));
 	}
 	
 

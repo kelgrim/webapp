@@ -17,6 +17,7 @@ public class CustomGlobalExceptionHandler extends ResponseEntityExceptionHandler
 		  MessageNotFoundException.class,
 		  MessageNotFoundForUserException.class,	
 		  UserDeleteFromDbFailedException.class,
+		  UserUpdateFailedException.class
 	  })
 	  public ResponseEntity<CustomErrorResponse> customHandleNotFound(Exception ex, WebRequest request) {
 
@@ -31,7 +32,6 @@ public class CustomGlobalExceptionHandler extends ResponseEntityExceptionHandler
 	  @ExceptionHandler({
 		  UserInvalidArgumentsException.class,
 		  MessageInvalidArgumentsException.class,
-		  UserUpdateFailedException.class,
 		  UserWriteToDbFailedException.class
 	  })
 	  public ResponseEntity<CustomErrorResponse> customBadArguments(Exception ex, WebRequest request){
