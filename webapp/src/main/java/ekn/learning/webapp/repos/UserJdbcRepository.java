@@ -8,6 +8,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.jdbc.BadSqlGrammarException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.PreparedStatementCreator;
@@ -159,12 +160,12 @@ public class UserJdbcRepository {
 			String query = String.format(
 					"update tbl_users "
 					+ "set "
-					+ "usernam{e = '%s', "
+					+ "username = '%s', "
 					+ "description = '%s', "
 					+ "email = '%s' "
 					+ "where id = %s;", user.getUsername(), user.getDescription(), user.getEmail(), id);
 			
-			//System.out.println(sql);
+			System.out.println(query);
 			int result = jdbcTemplate.update(query);	
 			if (result == 0) throw new UserUpdateFailedException(id);
 			else	return id;
@@ -173,6 +174,12 @@ public class UserJdbcRepository {
 			//e.printStackTrace();
 			throw new UserUpdateFailedException(id);
 		}
+		catch (BadSqlGrammarException e) {
+			//e.printStackTrace();
+			throw new UserUpdateFailedException(id);
+		}
+		
+		
 	}
 		
 }

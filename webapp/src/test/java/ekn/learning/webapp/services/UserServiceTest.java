@@ -90,7 +90,10 @@ public class UserServiceTest {
 	    
 	    @Test
 	    public void deleteUser_returnId() {
-	    	assertEquals(1, service.deleteUser(1));
+	    	//assertEquals(1, service.deleteUser(1));
+	    	ServiceResponseMessage responseMsg = service.deleteUser(1);
+	    	assertEquals("Delete User", responseMsg.getOperation());
+	    	assertEquals("Deletion of user with id: 1 was succesfull",responseMsg.getStatus());
 	    }
 	    
 	    @Test
