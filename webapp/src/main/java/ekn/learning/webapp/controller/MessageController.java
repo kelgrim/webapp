@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import ekn.learning.webapp.model.Message;
 import ekn.learning.webapp.services.MessageService;
+import ekn.learning.webapp.services.ServiceResponseMessage;
 
 @RestController
 public class MessageController {
@@ -29,7 +30,7 @@ public class MessageController {
 	}
 	
 	@RequestMapping(path="/message/{messageId}", method=RequestMethod.DELETE )
-	public int deleteMessage(@PathVariable() Integer messageId)	{
+	public ServiceResponseMessage deleteMessage(@PathVariable() Integer messageId)	{
 		return service.deleteMessage(messageId);
 	}
 	

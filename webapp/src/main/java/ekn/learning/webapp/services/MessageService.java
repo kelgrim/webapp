@@ -31,8 +31,9 @@ public class MessageService {
 		return repository.findMessageById(messageId);
 	}
 	
-	public int deleteMessage(int messageId) {
-		return repository.deleteMessage(messageId);
+	public ServiceResponseMessage deleteMessage(int messageId) {
+		repository.deleteMessage(messageId);
+		return new ServiceResponseMessage("Delete Message","Messager with id: "+ messageId + " was succesfully deleted" );
 	}
 
 	public Message updateMessage(int messageId, Message updateMessage) {

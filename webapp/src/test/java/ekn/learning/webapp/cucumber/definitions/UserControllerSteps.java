@@ -22,7 +22,7 @@ import static ekn.learning.webapp.helpers.TestHelper.*;
 import static io.restassured.RestAssured.given;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-public class UserTestStepDefinitions {
+public class UserControllerSteps {
 	
 	//Under test the default Port for the API is not 8080, but a random one
 	@LocalServerPort
@@ -111,9 +111,6 @@ public class UserTestStepDefinitions {
 				body(user).
 			when().
 	        	put(url);
-		System.out.println("--- Response as String ---");
-		System.out.println(response.asString());
-		System.out.println("The corresponding status: " + response.getStatusCode());
 	}
 
 	@Then("the service will return a Json with that same data")

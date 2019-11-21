@@ -109,8 +109,8 @@ public class MessageServiceTest {
 	
 	@Test
 	public void deleteMessage_returnInt() {
-		int result = service.deleteMessage(1);
-		assertEquals(1, result);
+		ServiceResponseMessage srm = service.deleteMessage(1);
+		assertEquals("Delete Message", srm.getOperation());
 	}
 	
 	@Test
