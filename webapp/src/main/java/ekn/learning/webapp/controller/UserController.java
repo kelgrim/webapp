@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import ekn.learning.webapp.model.User;
+import ekn.learning.webapp.services.ServiceResponseMessage;
 import ekn.learning.webapp.services.UserService;
 
 @RestController
@@ -34,13 +35,13 @@ public class UserController {
 		return service.addUser(user);	
 	}
 	
-	@RequestMapping(value = "/{id}", method = RequestMethod.PATCH)
+	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
 	public User updateUser(@PathVariable() Integer id, @RequestBody() User user) {
 		return service.updateUser(id, user);
 	}
 	
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-	public int deleteUser(@PathVariable() Integer id) {
+	public ServiceResponseMessage deleteUser(@PathVariable() Integer id) {
 		return service.deleteUser(id);
 	}
 	

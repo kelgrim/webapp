@@ -34,6 +34,23 @@
 		      <scope>test</scope>
 		</dependency> 
 		
+		<!--  Required for converting the received JSON to string/int -->
+		<dependency>
+		      <groupId>io.rest-assured</groupId>
+		      <artifactId>json-path</artifactId>
+		      <version>4.1.2</version>
+		      <scope>test</scope>
+		</dependency>
+		
+		<!--  Required to map JSON to Objects and vice versa -->
+		<!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind -->
+		<!--   	<dependency>
+		    <groupId>com.fasterxml.jackson.core</groupId>
+		    <artifactId>jackson-databind</artifactId>
+		    <version>2.10.0</version>
+		</dependency> -->
+		
+		
 		<dependency>
 		   <groupId>io.rest-assured</groupId>
 		   <artifactId>rest-assured-all</artifactId>

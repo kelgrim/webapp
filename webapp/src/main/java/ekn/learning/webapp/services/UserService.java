@@ -27,8 +27,9 @@ public class UserService {
 		return repository.findById(userId);	
 	}
 
-	public Integer deleteUser(int id) {
-		return repository.deleteUser(id);
+	public ServiceResponseMessage deleteUser(int id) {
+		repository.deleteUser(id);
+		return new ServiceResponseMessage("Delete User","Deletion of user with id: "+ id + " was succesfull" );
 	}
 
 	public User updateUser(int id, User user) {

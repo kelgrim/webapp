@@ -33,7 +33,7 @@ public class MessageController {
 		return service.deleteMessage(messageId);
 	}
 	
-	@RequestMapping(path="/message/{messageId}", method=RequestMethod.PATCH)
+	@RequestMapping(path="/message/{messageId}", method=RequestMethod.PUT)
 	public Message updateMessage(@PathVariable() Integer messageId, @RequestBody() Message message) {
 		return service.updateMessage(messageId, message);
 	}

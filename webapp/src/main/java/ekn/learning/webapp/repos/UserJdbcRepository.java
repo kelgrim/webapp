@@ -125,8 +125,21 @@ public class UserJdbcRepository {
 	}
 	
 	public int deleteUser(int id) throws UserDeleteFromDbFailedException {
-		String sql = "DELETE FROM TBL_USERS WHERE ID = ?";
+		//TODO: Figure out a better way: suggestion: make FK nullable? Or just end the user instead of deleting
 		try {
+			//First delete all messages
+			String deleteSentItems = "DELETE FROM TBL_MESSAGES WHERE SENDER_ID = ?";
+			String deleteReceivedItems = "DELETE FROM TBL_MESSAGES WHERE RECIPIENT_ID = ?";
+			try {
+				jdbcTemplate.update(deleteSentItems, id);
+				jdbcTemplate.update(deleteReceivedItems, id);
+			}
+			catch(Exception e) {
+				e.printStackTrace();
+			}
+			
+			//Now delete the actual user 
+			String sql = "DELETE FROM TBL_USERS WHERE ID = ?";
 			int result = jdbcTemplate.update(sql, id);
 			if (result == 0) {
 				throw new UserDeleteFromDbFailedException(id);
@@ -146,7 +159,7 @@ public class UserJdbcRepository {
 			String query = String.format(
 					"update tbl_users "
 					+ "set "
-					+ "username = '%s', "
+					+ "usernam{e = '%s', "
 					+ "description = '%s', "
 					+ "email = '%s' "
 					+ "where id = %s;", user.getUsername(), user.getDescription(), user.getEmail(), id);
