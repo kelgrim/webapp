@@ -1,5 +1,6 @@
 package ekn.learning.webapp.restassured;
 
+/*
 import static io.restassured.RestAssured.get;
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.equalTo;
@@ -15,6 +16,7 @@ import org.springframework.boot.web.server.LocalServerPort;
 import ekn.learning.webapp.model.User;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
+*/
 
 //@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class DeprecatedRestAssuredTest {
