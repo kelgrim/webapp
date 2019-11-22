@@ -15,8 +15,20 @@
     <description>Demo project for Spring Boot</description>
     <properties>
         <java.version>1.8</java.version>
-        <!-- Had to be added due to bug in Eclipse version -->
+        
+        <!-- Had to be overriden due to bug in Eclipse version -->
         <maven-jar-plugin.version>3.1.1</maven-jar-plugin.version>
+        
+        <!-- Overrides of version numbers in spring boot starter pom -->
+        <rest-assured.version>4.1.2</rest-assured.version>
+        <h2.version>1.4.193</h2.version>
+        <maven-surefire-plugin.version>2.19.1</maven-surefire-plugin.version>
+        
+        <!-- Versions equal to parent, adding for completeness -->
+        <mockito.version>3.1.0</mockito.version>
+        <junit.version>4.12</junit.version>
+        <junit-jupiter.version>5.5.2</junit-jupiter.version>
+        <json-path.version>2.4.0</json-path.version>
     </properties>
     <dependencies>
         <dependency>
@@ -27,61 +39,38 @@
         <dependency>
             <groupId>io.rest-assured</groupId>
             <artifactId>rest-assured</artifactId>
-            <version>4.1.2</version>
             <scope>test</scope>
         </dependency>
         <!-- Required for converting the received JSON to string/int -->
         <dependency>
             <groupId>io.rest-assured</groupId>
             <artifactId>json-path</artifactId>
-            <version>4.1.2</version>
             <scope>test</scope>
         </dependency>
-        <dependency>
-            <groupId>io.rest-assured</groupId>
-            <artifactId>rest-assured-all</artifactId>
-            <version>4.0.0</version>
-        </dependency>
-        <!-- JUnit 5 and Mockito -->
+        <!-- JUnit and Mockito -->
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-engine</artifactId>
-            <version>5.3.1</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.mockito</groupId>
             <artifactId>mockito-core</artifactId>
-            <version>2.21.0</version>
             <scope>test</scope>
         </dependency>
-        <!-- Backwards compatibility with JUnit 4 -->
-        <dependency>
-            <groupId>org.junit.platform</groupId>
-            <artifactId>junit-platform-runner</artifactId>
-            <version>1.2.0</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.junit.vintage</groupId>
-            <artifactId>junit-vintage-engine</artifactId>
-            <version>5.2.0</version>
-            <scope>test</scope>
-        </dependency>
-        <!-- JUnit5 extensions for Mockito -->
+        <!-- JUnit extensions for Mockito -->
         <dependency>
             <groupId>org.mockito</groupId>
             <artifactId>mockito-junit-jupiter</artifactId>
-            <version>2.23.0</version>
             <scope>test</scope>
         </dependency>
-        <!-- Import for Spring boot tests. (Eg. Embedded server starts before tests -->
+        <!-- Import for Spring boot tests. (Eg. Embedded server starts before tests) -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
-        <!-- Import for Cucumber testing -->
+        <!-- Imports for Cucumber testing -->
         <dependency>
             <groupId>io.cucumber</groupId>
             <artifactId>cucumber-java</artifactId>
@@ -109,7 +98,6 @@
         <dependency>
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>
-            <version>1.4.193</version>
         </dependency>
         <!-- JDBC -->
         <dependency>
@@ -117,7 +105,6 @@
             <artifactId>spring-boot-starter-jdbc</artifactId>
         </dependency>
     </dependencies>
-    <!-- Remove me -->
     <build>
         <plugins>
             <plugin>
@@ -126,7 +113,6 @@
             </plugin>
             <plugin>
                 <artifactId>maven-surefire-plugin</artifactId>
-                <version>2.19.1</version>
                 <dependencies>
                     <dependency>
                         <groupId>org.junit.platform</groupId>

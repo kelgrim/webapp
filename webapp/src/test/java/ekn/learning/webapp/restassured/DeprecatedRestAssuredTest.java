@@ -9,16 +9,16 @@ import static org.junit.Assert.assertTrue;
 import org.junit.jupiter.api.BeforeEach;
 //import org.junit.Before;
 import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
+//import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.web.server.LocalServerPort;
 
 import ekn.learning.webapp.model.User;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
 
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-public class RestAssuredTest {
-
+//@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+public class DeprecatedRestAssuredTest {
+/*
 	@LocalServerPort
 	private int port;
 	
@@ -92,6 +92,7 @@ public class RestAssuredTest {
 		
 				
 	}
+	*/
 	
 	
 }
