@@ -27,12 +27,12 @@
 		</dependency>
 		
 		<!-- Rest assured for testing API. Note that it must be declared before Junit -->
-	    <dependency>	
+	       <dependency>	
 		      <groupId>io.rest-assured</groupId>
 		      <artifactId>rest-assured</artifactId>
 		      <version>4.1.2</version>
 		      <scope>test</scope>
-		</dependency> 
+		</dependency>  
 		
 		<!--  Required for converting the received JSON to string/int -->
 		<dependency>

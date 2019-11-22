@@ -1,22 +1,20 @@
 package ekn.learning.webapp.cucumber.definitions;
 
+import static ekn.learning.webapp.helpers.TestHelper.compareMessage;
+import static io.restassured.RestAssured.delete;
 import static io.restassured.RestAssured.get;
 import static io.restassured.RestAssured.given;
-import static io.restassured.RestAssured.delete;
 import static org.hamcrest.Matchers.hasItems;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.web.server.LocalServerPort;
 
 import cucumber.api.java.Before;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
-import static ekn.learning.webapp.helpers.TestHelper.*;
 import ekn.learning.webapp.model.Message;
-import ekn.learning.webapp.model.User;
 import ekn.learning.webapp.services.ServiceResponseMessage;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;

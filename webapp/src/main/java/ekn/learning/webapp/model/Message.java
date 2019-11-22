@@ -1,6 +1,5 @@
 package ekn.learning.webapp.model;
 
-import java.time.*;
 import java.sql.Timestamp;
 
 public class Message {

@@ -1,8 +1,12 @@
 package ekn.learning.webapp.services;
 
 import static ekn.learning.webapp.helpers.TestHelper.getTestMessage;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
-import org.hibernate.validator.internal.util.logging.Messages;
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -10,12 +14,6 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.springframework.boot.test.context.SpringBootTest
 ;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import ekn.learning.webapp.exceptions.MessageInvalidArgumentsException;
 import ekn.learning.webapp.exceptions.MessageNotFoundException;
