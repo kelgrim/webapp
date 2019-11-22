@@ -19,7 +19,8 @@ import io.restassured.response.Response;
 */
 
 //@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-public class DeprecatedRestAssuredTest {
+@Deprecated
+public class RestAssuredTest {
 /*
 	@LocalServerPort
 	private int port;
