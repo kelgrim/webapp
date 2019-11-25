@@ -10,10 +10,10 @@ Currently the project contains the following:
 Documentation will follow, for now the below information should get most people started. .
 The service can be run as a standalone jar. 
 Below are some endpoints to get started with. 
-http://localhost:8080/api/v1/user to get a list of users
-http://localhost:8080/api/v1/1 to get the details for user with id 1
-http://localhost:8080/api/v1/user/inbox to get all messages
-http://localhost:8080/api/v1/message/1 to get details for message 1
-Operations for GET/POST/PUT/DELETE are supported. 
+- http://localhost:8080/api/v1/user to get a list of users
+- http://localhost:8080/api/v1/1 to get the details for user with id 1
+- http://localhost:8080/api/v1/user/inbox to get all messages
+- http://localhost:8080/api/v1/message/1 to get details for message 1
+- Note that Operations for GET/POST/PUT/DELETE are supported. 
 
 Any feedback is much appreciated.
